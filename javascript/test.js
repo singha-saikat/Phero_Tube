@@ -46,3 +46,31 @@ div.innerHTML=`
       </div>
       
       `
+
+      <div class="flex">
+        
+          <div class="avatar online">
+            <div class="w-14 rounded-full">
+              <img
+              src=${information?.authors[0]?.profile_picture}
+              />
+            </div>
+          </div>
+        
+        <div>
+        <h2 class="card-title">
+        ${information.title}
+        </h2>
+          
+        </div>
+      </div>
+      <div class="flex gap-4 ">
+      <h2>${information.authors[0].profile_name}</h2>
+      
+      <h2>${information?.authors[0]?.verified}</h2>
+      </div>
+      <h2>${information.others?.views} views</h2>
+      
+      `;
+
+    

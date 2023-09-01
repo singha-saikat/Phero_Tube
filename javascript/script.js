@@ -22,31 +22,34 @@ const handleLoadData = async (categoryID) => {
   );
   const data = await response.json();
   const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
   data.data?.forEach((information) => {
     console.log(data.data);
     const div = document.createElement("div");
     div.innerHTML = `
-      <div class="card bg-base-100 shadow-xl">
+      <div class="card bg-base-100 shadow-xl ">
         <figure>
           <img
             src=${information?.thumbnail}
           />
         </figure>
-      <div class=" flex gap-4 ">
-         <div class="w-14 rounded-full">
-            <img
-               src=${information?.authors?.profile_picture}
-            />
-         </div>
-         
-            <h2 class="card-title">
-            ${information.title}
-            </h2>
+        <div class="flex gap-4 items-center">
+        <div>
+        <div class="avatar">
+        <div class="w-24 rounded-full">
+          <img src=${information?.authors[0]?.profile_picture} />
+        </div>
       </div>
-      <div class="flex gap-4 ">
-      <h2>${information.authors?.profile_name}</h2>
+        </div>
+        <div>
+          <h6>${information.title}</h6>
+          
+        </div>
+      </div>
+      <div class="flex gap-4">
+      <h2>${information.authors[0].profile_name}</h2>
       
-      <h2>${information?.authors?.verified? verified: ''}</h2>
+      <h2>${information?.authors[0]?.verified}</h2>
       </div>
       <h2>${information.others?.views} views</h2>
       
