@@ -1,4 +1,3 @@
-
 const handleCategory = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
@@ -9,7 +8,6 @@ const handleCategory = async () => {
   const categoriesContainer = document.getElementById("category-container");
 
   data.data?.forEach((category) => {
-    
     const div = document.createElement("div");
     div.innerHTML = `
       <button onclick="handleLoadData('${category.category_id}')"  class="btn  sm:w-none btn-sm sm:btn-sm md:btn-md lg:btn-lg focus:bg-pink-400 focus:text-white">${category.category}</button>
@@ -17,7 +15,7 @@ const handleCategory = async () => {
     categoriesContainer.appendChild(div);
   });
 };
-let Id ;
+let Id;
 const handleLoadData = async (categoryID) => {
   Id = categoryID;
   const response = await fetch(
@@ -32,16 +30,13 @@ const handleLoadData = async (categoryID) => {
   } else {
     drawing.innerHTML = "";
   }
-   
 
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
   data.data?.forEach((information) => {
-    
-
     const time = information?.others?.posted_date;
-    
+
     const timeInHours = Math.floor(time / 3600);
     const timeInMin = parseInt(time % 60);
     console.log(timeInHours, timeInMin);
@@ -50,10 +45,10 @@ const handleLoadData = async (categoryID) => {
       <div class="card bg-base-100 shadow-xl ">
         <div  class="relative text-white object-cover ">
          <img  class="h-40 w-[100%]" src=${information?.thumbnail} />
-          <div  class="absolute bottom-1 right-1 bg-black ">
-          
-            ${timeInHours} hrs ${timeInMin} min ago 
-          </div>
+         <div  class="absolute bottom-1 right-1 bg-black ">
+         ${information?.others?.posted_date? `${timeInHours} hrs ${timeInMin} min ago` : ''}
+         
+       </div>
           
         </div>
         <div class="flex gap-4 items-center">
@@ -83,9 +78,7 @@ const handleLoadData = async (categoryID) => {
      
       `;
     cardContainer.appendChild(div);
-    
   });
-  
 };
 
 handleCategory();
@@ -103,25 +96,23 @@ const forDrawing = () => {
   drawing.appendChild(div);
 };
 const SortViews = async () => {
-  const res = await fetch(` https://openapi.programming-hero.com/api/videos/category/${Id}`);
-  const channeldata = await (res.json());
+  const res = await fetch(
+    ` https://openapi.programming-hero.com/api/videos/category/${Id}`
+  );
+  const channeldata = await res.json();
 
   const array = channeldata.data;
 
   array.sort((a, b) => {
-      const aViews = parseFloat(a.others.views);
-      const bViews = parseFloat(b.others.views);
-      return bViews - aViews;
+    const aViews = parseFloat(a.others.views);
+    const bViews = parseFloat(b.others.views);
+    return bViews - aViews;
   });
-  
-   
 
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
   array?.forEach((information) => {
-    
-
     const time = information?.others?.posted_date;
     console.log(time);
     const timeInHours = Math.floor(time / 3600);
@@ -132,10 +123,10 @@ const SortViews = async () => {
       <div class="card bg-base-100 shadow-xl ">
         <div  class="relative text-white object-cover ">
          <img  class="h-40 w-[100%]" src=${information?.thumbnail} />
-          <div  class="absolute bottom-1 right-1 bg-black ">
-          
-            ${timeInHours} hrs ${timeInMin} min ago 
-          </div>
+         <div  class="absolute bottom-1 right-1 bg-black ">
+         ${information?.others?.posted_date? `${timeInHours} hrs ${timeInMin} min ago` : ''}
+         
+       </div>
           
         </div>
         <div class="flex gap-4 items-center">
@@ -165,9 +156,6 @@ const SortViews = async () => {
      
       `;
     cardContainer.appendChild(div);
-    
   });
-}
- const getTime = () =>{
-  
- }
+};
+const getTime = () => {};
